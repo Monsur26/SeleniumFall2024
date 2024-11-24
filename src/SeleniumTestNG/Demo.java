@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class Demo {
@@ -42,13 +43,22 @@ public class Demo {
         passwordInputField.click();
         passwordInputField.sendKeys("pass1");
         WebElement loginButton = driver.findElement(By.id("loginButton"));
+        Assert.assertTrue(loginButton.isDisplayed());
         loginButton.click();
+
     }
     @Test (testName = "Search Bar test for rainforest website")
     public void searchBarTest(){
         WebElement searchBar = driver.findElement(By.xpath("//input[@placeholder='Search...']"));
         searchBar.click();
         searchBar.sendKeys("Great!");
+    }
+    @Test
+    public void shopLinkTest(){
+        WebElement shoplink = driver.findElement(By.linkText("Shop"));
+        shoplink.click();
+        String titleOfShopPage = driver.getTitle(); //Shop Links
+        Assert.assertEquals(titleOfShopPage,"Shop","Test Failed");
     }
 
     @AfterMethod
